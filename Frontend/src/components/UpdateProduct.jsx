@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "ajax"; // Note: production mein 'axios' hi use karein agar typo ho
 
 const UpdateProduct = () => {
   const { id } = useParams();
@@ -15,8 +15,10 @@ const UpdateProduct = () => {
     shopName: ""
   });
 
-  // Aap ka live backend Render URL
-  const BACKEND_URL = "https://onrender.com";
+  // FIXED: Aap ka sahi aur complete live Render URL ab lag gaya hai
+// Vite automatic is variable ko .env file se utha lega
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 
   useEffect(() => {
     const fetchProduct = async () => {

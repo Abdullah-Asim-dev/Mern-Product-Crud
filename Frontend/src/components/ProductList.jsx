@@ -6,8 +6,10 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Aap ka live backend Render URL
-  const BACKEND_URL = "https://onrender.com";
+  // FIXED: Aap ka exact live backend Render URL yahan update kar diya hai
+ // Vite automatic is variable ko .env file se utha lega
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 
   const fetchProducts = async () => {
     try {

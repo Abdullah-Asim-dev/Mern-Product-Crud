@@ -8,8 +8,10 @@ const AddProduct = () => {
     name: "", price: "", currencyCode: "USD", numberOfSales: "", rating: "", freeShipping: "false", shopName: "", image: null
   });
 
-  // Aap ka live backend Render URL
-  const BACKEND_URL = "https://onrender.com";
+  // FIXED: Aap ka exact live backend Render URL yahan update kar diya hai
+ // Vite automatic is variable ko .env file se utha lega
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
   const handleFileChange = (e) => setFormData({ ...formData, image: e.target.files[0] });
@@ -107,4 +109,5 @@ const AddProduct = () => {
 };
 
 export default AddProduct;
+
 

@@ -20,6 +20,16 @@ app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
 // CORS Configuration
+app.use(
+  cors({
+    origin: [
+      "https://mern-product-crud-1.vercel.app",
+      "https://mern-product-crud.vercel.app",
+      "https://vercel.app"
+    ],
+    credentials: true
+  }),
+);
 
 
 // Database Connection

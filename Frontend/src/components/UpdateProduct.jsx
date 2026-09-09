@@ -15,10 +15,13 @@ const UpdateProduct = () => {
     shopName: ""
   });
 
+  // Aap ka live backend Render URL
+  const BACKEND_URL = "https://onrender.com";
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/getProduct/${id}`);
+        const res = await axios.get(`${BACKEND_URL}/api/getProduct/${id}`);
         if (res.data.success) {
           const product = res.data.result;
           setFormData({
@@ -45,7 +48,7 @@ const UpdateProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put(`http://localhost:5000/api/update/${id}`, formData);
+      const res = await axios.put(`${BACKEND_URL}/api/update/${id}`, formData);
       if (res.data.success) {
         navigate("/");
       }
@@ -180,5 +183,3 @@ const UpdateProduct = () => {
 };
 
 export default UpdateProduct;
-
-

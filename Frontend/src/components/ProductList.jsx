@@ -6,9 +6,12 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Aap ka live backend Render URL
+  const BACKEND_URL = "https://onrender.com";
+
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/getProducts");
+      const response = await axios.get(`${BACKEND_URL}/api/getProducts`);
       if (response.data.success) {
         setProducts(response.data.result);
       }
@@ -22,7 +25,7 @@ const ProductList = () => {
   const deleteProduct = async (id) => {
     if (window.confirm("Confirm deletion pipeline for this entity instance?")) {
       try {
-        const response = await axios.delete(`http://localhost:5000/api/delete/${id}`);
+        const response = await axios.delete(`${BACKEND_URL}/api/delete/${id}`);
         if (response.data.success) {
           fetchProducts();
         }
@@ -74,7 +77,8 @@ const ProductList = () => {
               
               {/* Media Segment with Filter Transitions */}
               <div className="relative aspect-square bg-slate-900 overflow-hidden border-b border-white/[0.04]">
-                <img src={`http://localhost:5000/uploads/${product.image}`} alt={product.name} className="w-full h-full object-cover grayscale opacity-75 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                {/* Image source updated to live Render URL */}
+                <img src={`${BACKEND_URL}/uploads/${product.image}`} alt={product.name} className="w-full h-full object-cover grayscale opacity-75 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60" />
                 
                 {/* Micro Float Badges */}

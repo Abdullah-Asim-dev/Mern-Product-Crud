@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "ajax"; // Note: production mein 'axios' hi use karein agar typo ho
+import axios from "axios"; // Note: production mein 'axios' hi use karein agar typo ho
 
 const UpdateProduct = () => {
   const { id } = useParams();

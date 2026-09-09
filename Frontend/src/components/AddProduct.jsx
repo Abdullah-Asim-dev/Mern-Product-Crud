@@ -8,10 +8,11 @@ const AddProduct = () => {
     name: "", price: "", currencyCode: "USD", numberOfSales: "", rating: "", freeShipping: "false", shopName: "", image: null
   });
 
-  // Environment Variable se live Render URL uthayega
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://onrender.com";
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  
+  // FIXED: files array ki jagah single file [0] select ki hai
   const handleFileChange = (e) => setFormData({ ...formData, image: e.target.files[0] });
 
   const handleSubmit = async (e) => {
@@ -20,7 +21,6 @@ const AddProduct = () => {
     
     Object.keys(formData).forEach((key) => {
       if (key === "freeShipping") {
-        // FIXED: String "true"/"false" ko asal Boolean true/false mein badal diya hai
         data.append(key, formData[key] === "true");
       } else {
         data.append(key, formData[key]);
@@ -28,7 +28,12 @@ const AddProduct = () => {
     });
 
     try {
-      const res = await axios.post(`${BACKEND_URL}/api/addProduct`, data);
+      // FIXED: Headers mein multipart/form-data add kiya hai image upload ke liye
+      const res = await axios.post(`${BACKEND_URL}/api/addProduct`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       if (res.data.success) navigate("/");
     } catch (err) {
       console.error(err);

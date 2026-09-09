@@ -23,7 +23,7 @@ app.use("/uploads", express.static("uploads"));
 app.use(
   cors({
     origin: [
-      "https://mern-product-crud.vercel.app",
+      "https://mern-product-crud-1.vercel.app/",
     ],
     credentials: true
   }),

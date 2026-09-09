@@ -19,10 +19,13 @@ app.use(express.json());
 
 app.use("/uploads", express.static("uploads"));
 
-// CORS updated to allow both Netlify production and your Localhost port
+// CORS FIXED: Aap ka exact frontend link yahan add kar diya hai
 app.use(
   cors({
-    origin: [ "http://localhost:5173"],
+    origin: [
+      "https://mern-product-crud.vercel.app",
+      "https://vercel.app"
+    ],
     credentials: true
   }),
 );
@@ -33,7 +36,12 @@ connectDB();
 // Routes Middleware mapping
 app.use("/api", productRoutes);
 
-// Server Initialize Listener
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+// Server Initialize Listener (Only runs when not deployed as a Vercel function)
+if (process.env.NODE_ENV !== "production") {
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+}
+
+// Export for Vercel Serverless Architecture
+export default app;

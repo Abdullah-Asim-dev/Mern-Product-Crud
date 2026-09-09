@@ -24,7 +24,6 @@ app.use(
   cors({
     origin: [
       "https://mern-product-crud.vercel.app",
-      "https://vercel.app"
     ],
     credentials: true
   }),
